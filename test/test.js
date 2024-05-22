@@ -138,3 +138,31 @@ test('test character Zombie', () => {
     }
     expect(received).toEqual(expected);
 });
+
+test('test character levelUp', () => {
+    const char1 = new Character('Bowman', 'Bowman');
+    char1.levelUp();
+    const expected = {
+        name: 'Bowman',
+        type: 'Bowman',
+        health: 100,
+        level: 2,
+        attack: 0,
+        defence: 0
+    };
+    expect(char1).toEqual(expected);
+});
+
+test('test character damage', () => {
+    const char1 = new Character('Bowman', 'Bowman');
+    char1.damage(50);
+    const expected = {
+        name: 'Bowman',
+        type: 'Bowman',
+        health: 50,
+        level: 1,
+        attack: 0,
+        defence: 0
+    };
+    expect(char1).toEqual(expected);
+});

@@ -3,36 +3,44 @@ export class Character {
     if (name.length < 2) {
       throw new Error('Name is too short');
     };
+
     if (name.length > 10) {
       throw new Error('Name is too long');
     };
-    if (type !== 'Bowman' && type !== 'Swordsman' && type !== 'Magician' && type !== 'Daemon' && type !== 'Undead' && type !== 'Zombie') {
-      throw new Error('Type is not correct');
+
+    if (!['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'].includes(type)) {
+      throw new Error('Invalid character type');
     };
+
     this.name = name;
     this.type = type;
     this.health = 100;
     this.level = 1;
     this.attack = 0;
     this.defence = 0;
+  };
 
-    function levelUp() {
-      if (this.health > 0) {
-        this.level += 1;
-        this.attack += this.attack * 0.2;
-        this.defence += this.defence * 0.2;
-        this.health = 100;
-      };
+  levelUp() {
+    if (this.health > 0) {
+      this.level += 1;
+      this.attack = this.attack + (this.attack * 0.2);
+      this.defence = this.defence + (this.defence * 0.2);
+      this.health = 100;
+    } else {
+      throw new Error('Персонаж мертв');
     };
-    function damage(points) {
-      if (this.health >= 0) {
-        this.health -= points * (1 - this.defence / 100);
-      } else {
-        throw new Error('Character is dead');
-      };
+  };
+
+  damage(points) {
+    if (this.health >= 0) {
+      this.health -= points * (1 - this.defence / 100);
+    } else {
+      throw new Error('Персонаж мертв');
     };
   };
 };
+
+
 export class Bowman extends Character {
   constructor(name, type) {
     super(name, type);
@@ -40,6 +48,7 @@ export class Bowman extends Character {
     this.defence = 25;
   };
 };
+
 export class Swordsman extends Character {
   constructor(name, type) {
     super(name, type);
@@ -47,6 +56,7 @@ export class Swordsman extends Character {
     this.defence = 10;
   };
 };
+
 export class Magician extends Character {
   constructor(name, type) {
     super(name, type);
@@ -54,6 +64,7 @@ export class Magician extends Character {
     this.defence = 40;
   };
 };
+
 export class Daemon extends Character {
   constructor(name, type) {
     super(name, type);
@@ -61,6 +72,7 @@ export class Daemon extends Character {
     this.defence = 40;
   };
 };
+
 export class Undead extends Character {
   constructor(name, type) {
     super(name, type);
@@ -68,6 +80,7 @@ export class Undead extends Character {
     this.defence = 25;
   };
 };
+
 export class Zombie extends Character {
   constructor(name, type) {
     super(name, type);
